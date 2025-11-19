@@ -110,7 +110,7 @@
                 <input type="date" id="fecha">
 
                 <label>Patente</label>
-                <input type="text" id="patente" placeholder="AB-1234">
+                <input type="text" id="patente" placeholder="Patente" inputmode="numeric" pattern="[0-9]*">
 
                 <label>Tipo</label>
                 <select id="tipo">
@@ -119,10 +119,10 @@
                 </select>
 
                 <label>SKUs Subpedido A</label>
-                <input type="number" id="skuA" value="0" min="0">
+                <input type="number" id="skuA" min="0" placeholder="0">
 
                 <label>SKUs Subpedido B</label>
-                <input type="number" id="skuB" value="0" min="0">
+                <input type="number" id="skuB" min="0" placeholder="0">
 
                 <button class="btn" id="guardar">Guardar pedido</button>
                 <button class="btn-secondary btn" id="descargar">Descargar Excel del mes</button>
