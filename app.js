@@ -1,4 +1,10 @@
 // Precios
+
+const fechaInput = document.getElementById("fecha");
+const patenteInput = document.getElementById("patente");
+const tipoSelect = document.getElementById("tipo");
+const resumen = document.getElementById("resumen");
+
 const prices = {
     Normal: { week: 75, sunday: 90, cargo: 1300 },
     Bipicking: { week: 60, sunday: 72, cargo: 1040 }
