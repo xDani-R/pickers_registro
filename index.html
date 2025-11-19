@@ -1,336 +1,331 @@
 <!doctype html>
 <html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pickers — Registro de Pedidos</title>
+    <style>
+        :root {
+            --bg: #0d1220;
+            --card: #131a2c;
+            --accent: #6d28d9;
+            --accent2: #0ea5e9;
+            --text: #e9efff;
+            --muted: #a5b0c6;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>Pickers — Registro de Pedidos</title>
-        <style>
-            :root {
-                --bg: #0d1220;
-                --card: #131a2c;
-                --accent: #6d28d9;
-                --accent2: #0ea5e9;
-                --text: #e9efff;
-                --muted: #a5b0c6;
-                --glass: rgba(255, 255, 255, 0.05);
-            }
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Arial;
+            background: linear-gradient(135deg, var(--bg), #071026);
+            color: var(--text);
+            padding: 20px;
+            min-height: 100vh;
+        }
 
-            body {
-                margin: 0;
-                font-family: Inter, system-ui, Arial;
-                background: linear-gradient(135deg, var(--bg), #071026);
-                color: var(--text);
-                padding: 20px;
-                min-height: 100vh;
-            }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
 
-            .container {
-                max-width: 500px;
-                margin: auto;
-            }
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
 
-            h1 {
-                text-align: center;
-                font-size: 22px;
-                margin-bottom: 15px;
-            }
+        .card {
+            background: #131a2c;
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+            margin-bottom: 20px;
+        }
 
-            .card {
-                background: #131a2c;
-                padding: 18px;
-                border-radius: 14px;
-                box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
-                margin-bottom: 20px;
-            }
+        label {
+            font-size: 14px;
+            color: var(--muted);
+            display: block;
+            margin: 8px 0 4px;
+        }
 
-            label {
-                font-size: 14px;
-                color: var(--muted);
-                display: block;
-                margin: 8px 0 4px;
-            }
+        input, select {
+            width: 94%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #1a579552;
+            color: #ffffff;
+            font-size: 16px;
+        }
 
-            input,
-            select {
-                width: 94%;
-                padding: 12px;
-                border-radius: 10px;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                background: #1a579552;
-                color: #ffffff;
-                font-size: 16px;
-            }
+        .btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            box-shadow: 0 0 18px rgba(14, 165, 233, 0.35);
+        }
 
-            .btn {
-                width: 100%;
-                margin-top: 14px;
-                padding: 12px;
-                border: none;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: bold;
-                cursor: pointer;
-                color: white;
-                background: linear-gradient(90deg, var(--accent), var(--accent2));
-                box-shadow: 0 0 18px rgba(14, 165, 233, 0.35);
-            }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 8px;
+        }
 
-            .btn-secondary {
-                background: rgba(255, 255, 255, 0.1);
-                margin-top: 8px;
-            }
+        .summary {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(14, 165, 233, 0.15));
+            border: 1px solid rgba(109, 40, 217, 0.3);
+        }
 
-            .summary {
-                margin-top: 15px;
-                padding: 15px;
-                border-radius: 10px;
-                background: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(14, 165, 233, 0.15));
-                border: 1px solid rgba(109, 40, 217, 0.3);
-            }
+        .summary-title {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
 
-            .summary-title {
-                font-size: 13px;
-                color: var(--muted);
-                margin-bottom: 8px;
-            }
+        .summary-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent2);
+        }
 
-            .summary-amount {
-                font-size: 24px;
-                font-weight: bold;
-                color: var(--accent2);
-            }
+        .summary-next {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
 
-            .summary-next {
-                font-size: 14px;
-                color: var(--muted);
-                margin-top: 5px;
-            }
+        .pedidos-list {
+            margin-top: 10px;
+        }
 
-            .pedidos-list {
-                margin-top: 10px;
-            }
+        .pedido-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .pedido-item {
-                background: rgba(255, 255, 255, 0.03);
-                padding: 12px;
-                border-radius: 8px;
-                margin-bottom: 8px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        .pedido-info {
+            flex: 1;
+        }
 
-            .pedido-info {
-                flex: 1;
-            }
+        .pedido-fecha {
+            font-size: 13px;
+            color: var(--accent2);
+            font-weight: bold;
+        }
 
-            .pedido-fecha {
-                font-size: 13px;
-                color: var(--accent2);
-                font-weight: bold;
-            }
+        .pedido-detalle {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
 
-            .pedido-detalle {
-                font-size: 12px;
-                color: var(--muted);
-                margin-top: 3px;
-            }
+        .pedido-total {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text);
+            margin-right: 10px;
+        }
 
-            .pedido-total {
-                font-size: 16px;
-                font-weight: bold;
-                color: var(--text);
-                margin-right: 10px;
-            }
+        .btn-edit {
+            background: rgba(14, 165, 233, 0.2);
+            border: 1px solid var(--accent2);
+            color: var(--accent2);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-            .btn-edit {
-                background: rgba(14, 165, 233, 0.2);
-                border: 1px solid var(--accent2);
-                color: var(--accent2);
-                padding: 6px 12px;
-                border-radius: 6px;
-                font-size: 12px;
-                cursor: pointer;
-                font-weight: bold;
-            }
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 5px;
+        }
 
-            .btn-delete {
-                background: rgba(239, 68, 68, 0.2);
-                border: 1px solid #ef4444;
-                color: #ef4444;
-                padding: 6px 12px;
-                border-radius: 6px;
-                font-size: 12px;
-                cursor: pointer;
-                font-weight: bold;
-                margin-left: 5px;
-            }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
 
-            .modal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                z-index: 1000;
-                justify-content: center;
-                align-items: center;
-            }
+        .modal.active {
+            display: flex;
+        }
 
-            .modal.active {
-                display: flex;
-            }
+        .modal-content {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 14px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
 
-            .modal-content {
-                background: var(--card);
-                padding: 20px;
-                border-radius: 14px;
-                max-width: 450px;
-                width: 90%;
-                box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-            }
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-            .modal-title {
-                font-size: 18px;
-                font-weight: bold;
-                margin-bottom: 15px;
-            }
+        @media (max-width: 400px) {
+            h1 { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pickers — Registro Diario</h1>
 
-            @media (max-width: 400px) {
-                h1 {
-                    font-size: 19px;
-                }
-            }
-        </style>
-    </head>
+        <div class="card">
+            <label>Fecha</label>
+            <input type="date" id="fecha">
 
-    <body>
-        <div class="container">
-            <h1>Pickers — Registro Diario</h1>
+            <label>Patente</label>
+            <input type="text" id="patente" placeholder="Patente" inputmode="numeric" pattern="[0-9]*">
 
-            <div class="card">
-                <label>Fecha</label>
-                <input type="date" id="fecha">
+            <label>Tipo</label>
+            <select id="tipo">
+                <option value="Normal">Normal</option>
+                <option value="Bipicking">Bipicking</option>
+            </select>
 
-                <label>Patente</label>
-                <input type="text" id="patente" placeholder="Patente" inputmode="numeric" pattern="[0-9]*">
+            <label>SKUs Subpedido A</label>
+            <input type="number" id="skuA" min="0" placeholder="0">
 
-                <label>Tipo</label>
-                <select id="tipo">
-                    <option value="Normal">Normal</option>
-                    <option value="Bipicking">Bipicking</option>
-                </select>
+            <label>SKUs Subpedido B</label>
+            <input type="number" id="skuB" min="0" placeholder="0">
 
-                <label>SKUs Subpedido A</label>
-                <input type="number" id="skuA" min="0" placeholder="0">
-
-                <label>SKUs Subpedido B</label>
-                <input type="number" id="skuB" min="0" placeholder="0">
-
-                <button class="btn" id="guardar">Guardar pedido</button>
-
-                <div class="summary" id="resumen">
-                    <div class="summary-title">Total acumulado este mes</div>
-                    <div class="summary-amount">$0</div>
-                    <div class="summary-next">Pago próximo mes: $0</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 style="font-size: 18px; margin-top: 0;">Pedidos del mes</h2>
-                <div class="pedidos-list" id="pedidosList"></div>
-                <button class="btn-secondary btn" id="descargar">Descargar Excel del mes</button>
-                <button class="btn-secondary btn" id="borrarHistorial">Borrar historial del mes</button>
+            <button class="btn" id="guardar">Guardar pedido</button>
+            
+            <div class="summary" id="resumen">
+                <div class="summary-title">Total acumulado este mes</div>
+                <div class="summary-amount">$0</div>
+                <div class="summary-next">Pago próximo mes: $0</div>
             </div>
         </div>
 
-        <!-- Modal de edición -->
-        <div class="modal" id="modalEdit">
-            <div class="modal-content">
-                <div class="modal-title">Editar Pedido</div>
-
-                <label>Fecha</label>
-                <input type="date" id="editFecha">
-
-                <label>Patente</label>
-                <input type="text" id="editPatente" placeholder="Patente">
-
-                <label>Tipo</label>
-                <select id="editTipo">
-                    <option value="Normal">Normal</option>
-                    <option value="Bipicking">Bipicking</option>
-                </select>
-
-                <label>SKUs Subpedido A</label>
-                <input type="number" id="editSkuA" min="0" placeholder="0">
-
-                <label>SKUs Subpedido B</label>
-                <input type="number" id="editSkuB" min="0" placeholder="0">
-
-                <button class="btn" id="guardarEdit">Guardar cambios</button>
-                <button class="btn-secondary btn" id="cancelarEdit">Cancelar</button>
-            </div>
+        <div class="card">
+            <h2 style="font-size: 18px; margin-top: 0;">Pedidos del mes</h2>
+            <div class="pedidos-list" id="pedidosList"></div>
+            <button class="btn-secondary btn" id="descargar">Descargar Excel del mes</button>
+            <button class="btn-secondary btn" id="borrarHistorial">Borrar historial del mes</button>
         </div>
+    </div>
 
-        <script>
-            const prices = {
-                Normal: { week: 75, sunday: 90, cargo: 1300 },
-                Bipicking: { week: 60, sunday: 72, cargo: 1040 }
-            };
+    <!-- Modal de edición -->
+    <div class="modal" id="modalEdit">
+        <div class="modal-content">
+            <div class="modal-title">Editar Pedido</div>
+            
+            <label>Fecha</label>
+            <input type="date" id="editFecha">
 
-            let editingIndex = null;
+            <label>Patente</label>
+            <input type="text" id="editPatente" placeholder="Patente">
 
-            function isSunday(date) {
-                const d = new Date(date + "T00:00:00");
-                return d.getDay() === 0;
-            }
+            <label>Tipo</label>
+            <select id="editTipo">
+                <option value="Normal">Normal</option>
+                <option value="Bipicking">Bipicking</option>
+            </select>
 
-            function calculateTotal(tipo, fecha, skuA, skuB) {
-                const p = prices[tipo];
-                const precioSKU = isSunday(fecha) ? p.sunday : p.week;
-                const subtotal = (skuA + skuB) * precioSKU;
-                const total = subtotal + p.cargo;
-                return { precioSKU, subtotal, total };
-            }
+            <label>SKUs Subpedido A</label>
+            <input type="number" id="editSkuA" min="0" placeholder="0">
 
-            function getMesActual() {
-                return new Date().toISOString().slice(0, 7);
-            }
+            <label>SKUs Subpedido B</label>
+            <input type="number" id="editSkuB" min="0" placeholder="0">
 
-            function getRegistros() {
-                const mesKey = getMesActual();
-                return JSON.parse(localStorage.getItem(mesKey) || "[]");
-            }
+            <button class="btn" id="guardarEdit">Guardar cambios</button>
+            <button class="btn-secondary btn" id="cancelarEdit">Cancelar</button>
+        </div>
+    </div>
 
-            function saveRegistros(registros) {
-                const mesKey = getMesActual();
-                localStorage.setItem(mesKey, JSON.stringify(registros));
-            }
+    <script>
+        const prices = {
+            Normal: { week: 75, sunday: 90, cargo: 1300 },
+            Bipicking: { week: 60, sunday: 72, cargo: 1040 }
+        };
 
-            function updateResumen() {
-                const registros = getRegistros();
-                const totalMes = registros.reduce((sum, r) => sum + r.total, 0);
+        let editingIndex = null;
 
-                document.getElementById("resumen").innerHTML = `
+        function isSunday(date) {
+            const d = new Date(date + "T00:00:00");
+            return d.getDay() === 0;
+        }
+
+        function calculateTotal(tipo, fecha, skuA, skuB) {
+            const p = prices[tipo];
+            const precioSKU = isSunday(fecha) ? p.sunday : p.week;
+            const subtotal = (skuA + skuB) * precioSKU;
+            const total = subtotal + p.cargo;
+            return { precioSKU, subtotal, total };
+        }
+
+        function getMesActual() {
+            return new Date().toISOString().slice(0, 7);
+        }
+
+        function getRegistros() {
+            const mesKey = getMesActual();
+            return JSON.parse(localStorage.getItem(mesKey) || "[]");
+        }
+
+        function saveRegistros(registros) {
+            const mesKey = getMesActual();
+            localStorage.setItem(mesKey, JSON.stringify(registros));
+        }
+
+        function updateResumen() {
+            const registros = getRegistros();
+            const totalMes = registros.reduce((sum, r) => sum + r.total, 0);
+            
+            document.getElementById("resumen").innerHTML = `
                 <div class="summary-title">Total acumulado este mes</div>
                 <div class="summary-amount">$${totalMes.toLocaleString('es-CL')}</div>
                 <div class="summary-next">Pago próximo mes: $${totalMes.toLocaleString('es-CL')}</div>
             `;
+        }
+
+        function renderPedidos() {
+            const registros = getRegistros();
+            const lista = document.getElementById("pedidosList");
+            
+            if (registros.length === 0) {
+                lista.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 20px;">No hay pedidos registrados</div>';
+                return;
             }
 
-            function renderPedidos() {
-                const registros = getRegistros();
-                const lista = document.getElementById("pedidosList");
-
-                if (registros.length === 0) {
-                    lista.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 20px;">No hay pedidos registrados</div>';
-                    return;
-                }
-
-                lista.innerHTML = registros.map((r, index) => `
+            lista.innerHTML = registros.map((r, index) => `
                 <div class="pedido-item">
                     <div class="pedido-info">
                         <div class="pedido-fecha">${r.fecha} - Patente ${r.patente}</div>
@@ -341,148 +336,147 @@
                     <button class="btn-delete" onclick="eliminarPedido(${index})">✕</button>
                 </div>
             `).join('');
-            }
+        }
 
-            window.editarPedido = function (index) {
-                const registros = getRegistros();
-                const pedido = registros[index];
+        window.editarPedido = function(index) {
+            const registros = getRegistros();
+            const pedido = registros[index];
+            
+            document.getElementById("editFecha").value = pedido.fecha;
+            document.getElementById("editPatente").value = pedido.patente;
+            document.getElementById("editTipo").value = pedido.tipo;
+            document.getElementById("editSkuA").value = pedido.skuA;
+            document.getElementById("editSkuB").value = pedido.skuB;
+            
+            editingIndex = index;
+            document.getElementById("modalEdit").classList.add("active");
+        };
 
-                document.getElementById("editFecha").value = pedido.fecha;
-                document.getElementById("editPatente").value = pedido.patente;
-                document.getElementById("editTipo").value = pedido.tipo;
-                document.getElementById("editSkuA").value = pedido.skuA;
-                document.getElementById("editSkuB").value = pedido.skuB;
-
-                editingIndex = index;
-                document.getElementById("modalEdit").classList.add("active");
-            };
-
-            window.eliminarPedido = function (index) {
-                if (!confirm("¿Seguro que quieres eliminar este pedido?")) return;
-
-                const registros = getRegistros();
-                registros.splice(index, 1);
-                saveRegistros(registros);
-
-                renderPedidos();
-                updateResumen();
-            };
-
-            document.getElementById("guardar").addEventListener("click", () => {
-                const fecha = document.getElementById("fecha").value;
-                const patente = document.getElementById("patente").value;
-                const tipo = document.getElementById("tipo").value;
-                const skuA = Number(document.getElementById("skuA").value);
-                const skuB = Number(document.getElementById("skuB").value);
-
-                if (!fecha || !patente) {
-                    alert("Por favor completa la fecha y patente");
-                    return;
-                }
-
-                const calc = calculateTotal(tipo, fecha, skuA, skuB);
-
-                const registro = {
-                    fecha,
-                    patente,
-                    tipo,
-                    skuA,
-                    skuB,
-                    precioSKU: calc.precioSKU,
-                    subtotal: calc.subtotal,
-                    total: calc.total
-                };
-
-                const registros = getRegistros();
-                registros.push(registro);
-                saveRegistros(registros);
-
-                alert("Pedido guardado ✔");
-
-                document.getElementById("fecha").value = "";
-                document.getElementById("patente").value = "";
-                document.getElementById("skuA").value = "";
-                document.getElementById("skuB").value = "";
-                document.getElementById("tipo").value = "Normal";
-
-                renderPedidos();
-                updateResumen();
-            });
-
-            document.getElementById("guardarEdit").addEventListener("click", () => {
-                const fecha = document.getElementById("editFecha").value;
-                const patente = document.getElementById("editPatente").value;
-                const tipo = document.getElementById("editTipo").value;
-                const skuA = Number(document.getElementById("editSkuA").value);
-                const skuB = Number(document.getElementById("editSkuB").value);
-
-                const calc = calculateTotal(tipo, fecha, skuA, skuB);
-
-                const registros = getRegistros();
-                registros[editingIndex] = {
-                    fecha,
-                    patente,
-                    tipo,
-                    skuA,
-                    skuB,
-                    precioSKU: calc.precioSKU,
-                    subtotal: calc.subtotal,
-                    total: calc.total
-                };
-
-                saveRegistros(registros);
-                document.getElementById("modalEdit").classList.remove("active");
-
-                alert("Pedido actualizado ✔");
-                renderPedidos();
-                updateResumen();
-            });
-
-            document.getElementById("cancelarEdit").addEventListener("click", () => {
-                document.getElementById("modalEdit").classList.remove("active");
-            });
-
-            document.getElementById("descargar").addEventListener("click", () => {
-                const registros = getRegistros();
-
-                if (registros.length === 0) {
-                    alert("No hay registros este mes");
-                    return;
-                }
-
-                let csv = "Fecha,Patente,Tipo,SKU A,SKU B,Precio SKU,Subtotal,Total\n";
-                registros.forEach(r => {
-                    csv += `${r.fecha},${r.patente},${r.tipo},${r.skuA},${r.skuB},${r.precioSKU},${r.subtotal},${r.total}\n`;
-                });
-
-                const blob = new Blob([csv], { type: "text/csv" });
-                const a = document.createElement("a");
-                a.href = URL.createObjectURL(blob);
-                a.download = `pedidos_${getMesActual()}.csv`;
-                a.click();
-            });
-
-            document.getElementById("borrarHistorial").addEventListener("click", () => {
-                const registros = getRegistros();
-
-                if (registros.length === 0) {
-                    alert("No hay datos para borrar");
-                    return;
-                }
-
-                if (!confirm("¿Seguro que quieres borrar todos los registros del mes?")) return;
-
-                localStorage.removeItem(getMesActual());
-                alert("Historial borrado ✔");
-
-                renderPedidos();
-                updateResumen();
-            });
-
-            // Inicializar
+        window.eliminarPedido = function(index) {
+            if (!confirm("¿Seguro que quieres eliminar este pedido?")) return;
+            
+            const registros = getRegistros();
+            registros.splice(index, 1);
+            saveRegistros(registros);
+            
             renderPedidos();
             updateResumen();
-        </script>
-    </body>
+        };
 
+        document.getElementById("guardar").addEventListener("click", () => {
+            const fecha = document.getElementById("fecha").value;
+            const patente = document.getElementById("patente").value;
+            const tipo = document.getElementById("tipo").value;
+            const skuA = Number(document.getElementById("skuA").value);
+            const skuB = Number(document.getElementById("skuB").value);
+
+            if (!fecha || !patente) {
+                alert("Por favor completa la fecha y patente");
+                return;
+            }
+
+            const calc = calculateTotal(tipo, fecha, skuA, skuB);
+
+            const registro = {
+                fecha,
+                patente,
+                tipo,
+                skuA,
+                skuB,
+                precioSKU: calc.precioSKU,
+                subtotal: calc.subtotal,
+                total: calc.total
+            };
+
+            const registros = getRegistros();
+            registros.push(registro);
+            saveRegistros(registros);
+
+            alert("Pedido guardado ✔");
+
+            document.getElementById("fecha").value = "";
+            document.getElementById("patente").value = "";
+            document.getElementById("skuA").value = "";
+            document.getElementById("skuB").value = "";
+            document.getElementById("tipo").value = "Normal";
+
+            renderPedidos();
+            updateResumen();
+        });
+
+        document.getElementById("guardarEdit").addEventListener("click", () => {
+            const fecha = document.getElementById("editFecha").value;
+            const patente = document.getElementById("editPatente").value;
+            const tipo = document.getElementById("editTipo").value;
+            const skuA = Number(document.getElementById("editSkuA").value);
+            const skuB = Number(document.getElementById("editSkuB").value);
+
+            const calc = calculateTotal(tipo, fecha, skuA, skuB);
+
+            const registros = getRegistros();
+            registros[editingIndex] = {
+                fecha,
+                patente,
+                tipo,
+                skuA,
+                skuB,
+                precioSKU: calc.precioSKU,
+                subtotal: calc.subtotal,
+                total: calc.total
+            };
+
+            saveRegistros(registros);
+            document.getElementById("modalEdit").classList.remove("active");
+            
+            alert("Pedido actualizado ✔");
+            renderPedidos();
+            updateResumen();
+        });
+
+        document.getElementById("cancelarEdit").addEventListener("click", () => {
+            document.getElementById("modalEdit").classList.remove("active");
+        });
+
+        document.getElementById("descargar").addEventListener("click", () => {
+            const registros = getRegistros();
+
+            if (registros.length === 0) {
+                alert("No hay registros este mes");
+                return;
+            }
+
+            let csv = "Fecha,Patente,Tipo,SKU A,SKU B,Precio SKU,Subtotal,Total\n";
+            registros.forEach(r => {
+                csv += `${r.fecha},${r.patente},${r.tipo},${r.skuA},${r.skuB},${r.precioSKU},${r.subtotal},${r.total}\n`;
+            });
+
+            const blob = new Blob([csv], { type: "text/csv" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `pedidos_${getMesActual()}.csv`;
+            a.click();
+        });
+
+        document.getElementById("borrarHistorial").addEventListener("click", () => {
+            const registros = getRegistros();
+            
+            if (registros.length === 0) {
+                alert("No hay datos para borrar");
+                return;
+            }
+
+            if (!confirm("¿Seguro que quieres borrar todos los registros del mes?")) return;
+
+            localStorage.removeItem(getMesActual());
+            alert("Historial borrado ✔");
+            
+            renderPedidos();
+            updateResumen();
+        });
+
+        // Inicializar
+        renderPedidos();
+        updateResumen();
+    </script>
+</body>
 </html>
