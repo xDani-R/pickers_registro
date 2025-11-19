@@ -1,6 +1,6 @@
 {
   "name": "Pickers Registro",
-  "short_name": "Pickers",
+  "short_name": "Historial Pickers",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0d1220",

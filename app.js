@@ -52,6 +52,15 @@ document.getElementById("guardar").addEventListener("click", () => {
     resumen.textContent = `Total del pedido: $${calc.total}`;
 
     alert("Pedido guardado ✔");
+
+    // Limpiar campos después de guardar
+    fechaInput.value = "";
+    patenteInput.value = "";
+    document.getElementById("skuA").value = "";
+    document.getElementById("skuB").value = "";
+    tipoSelect.value = "Normal";
+    resumen.textContent = "Total: $0";
+
 });
 
 document.getElementById("descargar").addEventListener("click", () => {
@@ -74,4 +83,19 @@ document.getElementById("descargar").addEventListener("click", () => {
     a.href = URL.createObjectURL(blob);
     a.download = `pedidos_${mesActual}.csv`;
     a.click();
+});
+
+document.getElementById("borrarHistorial").addEventListener("click", () => {
+    const mesActual = new Date().toISOString().slice(0, 7);
+
+    if (!localStorage.getItem(mesActual)) {
+        alert("No hay datos para borrar");
+        return;
+    }
+
+    const confirmar = confirm("¿Seguro que quieres borrar todos los registros del mes?");
+    if (!confirmar) return;
+
+    localStorage.removeItem(mesActual);
+    alert("Historial borrado ✔");
 });
