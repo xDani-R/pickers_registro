@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pickers — Registro de Pedidos</title>
+
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="manifest.json" />
+
+    <style>
+        :root {
+            --bg: #0d1220;
+            --card: #131a2c;
+            --accent: #6d28d9;
+            --accent2: #0ea5e9;
+            --text: #e9efff;
+            --muted: #a5b0c6;
+            --glass: rgba(255,255,255,0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Arial;
+            background: linear-gradient(135deg, var(--bg), #071026);
+            color: var(--text);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: #131a2c;
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.35);
+        }
+
+        label {
+            font-size: 14px;
+            color: var(--muted);
+            display: block;
+            margin: 8px 0 4px;
+        }
+
+        input, select {
+            width: 94%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #1a579552;
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            box-shadow: 0 0 18px rgba(14,165,233,0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            margin-top: 8px;
+        }
+
+        .summary {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* Móvil */
+        @media (max-width: 400px) {
+            h1 { font-size: 19px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Pickers — Registro Diario</h1>
+
+        <div class="card">
+            <label>Fecha</label>
+            <input type="date" id="fecha">
+
+            <label>Patente</label>
+            <input type="text" id="patente" placeholder="AB-1234">
+
+            <label>Tipo</label>
+            <select id="tipo">
+                <option value="Normal">Normal</option>
+                <option value="Bipicking">Bipicking</option>
+            </select>
+
+            <label>SKUs Subpedido A</label>
+            <input type="number" id="skuA" value="0" min="0">
+
+            <label>SKUs Subpedido B</label>
+            <input type="number" id="skuB" value="0" min="0">
+
+            <button class="btn" id="guardar">Guardar pedido</button>
+            <button class="btn-secondary btn" id="descargar">Descargar Excel del mes</button>
+
+            <div class="summary" id="resumen">Total: $0</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
